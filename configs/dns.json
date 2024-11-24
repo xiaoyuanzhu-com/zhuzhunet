@@ -1,0 +1,10 @@
+{
+    "servers": [
+        {
+            "name": "cloudflare",
+            "type": "udp",
+            "addr": "1.1.1.1",
+            "logo": "https://cdn.svgporn.com/logos/cloudflare-icon.svg?response-content-disposition=attachment%3Bfilename%3Dcloudflare-icon.svg"
+        }
+    ]
+}
