@@ -11,6 +11,10 @@ func init() {
 	logger = buildLogger("debug")
 }
 
+func GetLogger() *zap.Logger {
+	return logger
+}
+
 func buildLogger(level string) *zap.Logger {
 	cfg := zap.NewDevelopmentConfig()
 	var zapLevel zapcore.Level

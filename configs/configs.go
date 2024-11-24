@@ -2,8 +2,10 @@ package configs
 
 import (
 	"encoding/json"
+	"flag"
 	"os"
 	"path/filepath"
+	"runtime"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/logs"
@@ -40,9 +42,15 @@ type DNSServer struct {
 var configDir string
 
 func init() {
-	configDir = os.Getenv("CONFIG")
+	configDir = os.Getenv("CONFIG_DIR")
 	if len(configDir) == 0 {
-		configDir = "/config"
+		runningTests := flag.Lookup("test.v") != nil
+		if runningTests {
+			_, filename, _, _ := runtime.Caller(0)
+			configDir = filepath.Dir(filename)
+		} else {
+			configDir = "./configs"
+		}
 	}
 }
 
