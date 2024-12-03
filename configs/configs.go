@@ -13,30 +13,8 @@ import (
 )
 
 type Configs struct {
-	LogLevel string     `json:"log_level"`
-	DNS      DNSConfigs `json:"dns"`
-}
-
-type DNSConfigs struct {
-	Servers []DNSServer `json:"servers"`
-}
-
-type DNSServerType string
-
-const (
-	DNSServerTypeDefault  DNSServerType = "default"
-	DNSServerTypeUDP      DNSServerType = "udp"
-	DNSServerTypeDoH      DNSServerType = "doh"
-	DNSServerTypeDoT      DNSServerType = "dot"
-	DNSServerTypeDoQ      DNSServerType = "doq"
-	DNSServerTypeDNSCrypt DNSServerType = "dnscrypt"
-)
-
-type DNSServer struct {
-	Name string        `json:"name"`
-	Type DNSServerType `json:"type"`
-	Addr string        `json:"addr"`
-	Logo string        `json:"logo"`
+	LogLevel string `json:"log_level"`
+	CloudURL string `json:"cloud_url"`
 }
 
 var configDir string
@@ -55,15 +33,10 @@ func init() {
 }
 
 func Load() (*Configs, error) {
-	var dnsConfigs DNSConfigs
-	if err := readConfig(filepath.Join(configDir, "dns.json"), &dnsConfigs); err != nil {
-		return nil, err
-	}
 	var configs Configs
 	if err := readConfig(filepath.Join(configDir, "configs.json"), &configs); err != nil {
 		return nil, err
 	}
-	configs.DNS = dnsConfigs
 	return &configs, nil
 }
 

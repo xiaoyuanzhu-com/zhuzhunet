@@ -3,34 +3,37 @@ package server
 import (
 	"context"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/static"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
-	"github.com/xiaoyuanzhu-com/zhuzhunet/base"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/configs"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/logs"
 	"go.uber.org/zap"
 )
 
 type Server struct {
-	ctx *base.ServerContext
-
+	configs    *configs.Configs
 	httpServer *http.Server
+	cloudURL   *url.URL
 }
 
 func NewServer(configs *configs.Configs) *Server {
 	return &Server{
-		ctx: &base.ServerContext{
-			Configs: configs,
-		},
+		configs: configs,
 	}
 }
 
 func (s *Server) Start() error {
-	logs.Info("start server", zap.Any("configs", s.ctx.Configs))
+	logs.Info("start server", zap.Any("configs", s.configs))
+	var err error
+	s.cloudURL, err = url.Parse(s.configs.CloudURL)
+	if err != nil {
+		return err
+	}
 	if err := s.startAPI(); err != nil {
 		return err
 	}
