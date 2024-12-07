@@ -6,6 +6,7 @@ import AppLayout from './components/app-layout.jsx'
 import { LocaleProvider } from '@douyinfe/semi-ui'
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US'
 import Test from './pages/test/test.jsx'
+import Monitoring from './pages/monitoring/monitoring.jsx'
 import Settings from './pages/settings/settings.jsx'
 
 function setDarkMode(dark) {
@@ -36,6 +37,7 @@ createRoot(root).render(
         <Routes>
           <Route element={<AppLayout />} >
             <Route index element={<Test />} />
+            <Route path="/monitoring" element={<Monitoring />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>

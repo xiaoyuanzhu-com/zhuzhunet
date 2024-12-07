@@ -1,5 +1,6 @@
 package models
 
 type Manifest struct {
-	DNS *ManifestDNS `json:"dns" bson:"dns"`
+	SessionID string       `json:"session_id" bson:"session_id"`
+	DNS       *ManifestDNS `json:"dns" bson:"dns"`
 }

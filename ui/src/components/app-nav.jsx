@@ -1,6 +1,6 @@
 import React from 'react'
 import { Nav } from '@douyinfe/semi-ui'
-import { IconGettingStarted, IconConfig } from '@douyinfe/semi-icons-lab'
+import { IconCheckbox, IconConfig, IconHeart } from '@douyinfe/semi-icons-lab'
 import { Link } from 'react-router'
 
 export default function AppFooter() {
@@ -9,7 +9,13 @@ export default function AppFooter() {
       itemKey: 'test',
       text: 'Test Network',
       to: '/',
-      icon: <IconGettingStarted />,
+      icon: <IconCheckbox />,
+    },
+    {
+      itemKey: 'monitoring',
+      text: 'Monitoring',
+      to: '/monitoring',
+      icon: <IconHeart />,
     },
     {
       itemKey: 'settings',
@@ -19,7 +25,6 @@ export default function AppFooter() {
     },
   ]
   const renderWrapper = ({ itemElement, isSubNav, isInSubNav, props }) => {
-    console.log(props)
     return (
       <Link to={props.to}>
         {itemElement}
@@ -30,7 +35,7 @@ export default function AppFooter() {
     collapseButton: true,
   }
   return (
-    <Nav items={items} renderWrapper={renderWrapper} footer={footer}>
+    <Nav className="h-full" items={items} renderWrapper={renderWrapper} footer={footer}>
     </Nav>
   )
 }

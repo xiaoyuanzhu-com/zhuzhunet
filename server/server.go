@@ -3,7 +3,6 @@ package server
 import (
 	"context"
 	"net/http"
-	"net/url"
 	"time"
 
 	"github.com/gin-contrib/gzip"
@@ -18,7 +17,7 @@ import (
 type Server struct {
 	configs    *configs.Configs
 	httpServer *http.Server
-	cloudURL   *url.URL
+	cloud      *Cloud
 }
 
 func NewServer(configs *configs.Configs) *Server {
@@ -29,11 +28,7 @@ func NewServer(configs *configs.Configs) *Server {
 
 func (s *Server) Start() error {
 	logs.Info("start server", zap.Any("configs", s.configs))
-	var err error
-	s.cloudURL, err = url.Parse(s.configs.CloudURL)
-	if err != nil {
-		return err
-	}
+	s.cloud = NewCloud(s.configs.CloudURL)
 	if err := s.startAPI(); err != nil {
 		return err
 	}

@@ -2,10 +2,10 @@ package configs
 
 import (
 	"encoding/json"
-	"flag"
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/logs"
@@ -19,11 +19,14 @@ type Configs struct {
 
 var configDir string
 
+func isInTest() bool {
+	return strings.HasSuffix(os.Args[0], ".test") || strings.Contains(os.Args[0], "debug_bin")
+}
+
 func init() {
 	configDir = os.Getenv("CONFIG_DIR")
 	if len(configDir) == 0 {
-		runningTests := flag.Lookup("test.v") != nil
-		if runningTests {
+		if isInTest() {
 			_, filename, _, _ := runtime.Caller(0)
 			configDir = filepath.Dir(filename)
 		} else {
