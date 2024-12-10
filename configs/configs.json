@@ -1,4 +1,4 @@
 {
     "log_level": "info",
-    "cloud_url": "http://172.16.2.10:13872/"
+    "cloud_url": "https://net.xiaoyuanzhu.com/"
 }

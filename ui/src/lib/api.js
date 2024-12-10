@@ -7,5 +7,7 @@ const getJSON = async (url) => {
 
 export default {
   getManifest: () => getJSON('/api/manifest'),
-  getBrands: () => getJSON('/api/brands'),
+  getBrandList: () => getJSON('/api/brands'),
+  getDNSList: () => getJSON('/api/dns'),
 }
+

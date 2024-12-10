@@ -39,10 +39,18 @@ func (c *Cloud) GetManifest() (*models.Manifest, error) {
 	return &manifest, nil
 }
 
-func (c *Cloud) GetBrands() ([]*models.Brand, error) {
-	var brands []*models.Brand
-	if err := c.getJSON("api/brands", &brands); err != nil {
+func (c *Cloud) GetBrandList() (*models.BrandList, error) {
+	var brandList models.BrandList
+	if err := c.getJSON("/api/brands", &brandList); err != nil {
 		return nil, err
 	}
-	return brands, nil
+	return &brandList, nil
+}
+
+func (c *Cloud) GetDNSList() (*models.DNSList, error) {
+	var dnsList models.DNSList
+	if err := c.getJSON("/api/dns", &dnsList); err != nil {
+		return nil, err
+	}
+	return &dnsList, nil
 }

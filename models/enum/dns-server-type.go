@@ -1,12 +1,12 @@
 package enum
 
-type DNSServerType string
+type DNSType string
 
 const (
-	DNSServerTypeDefault  DNSServerType = "default"
-	DNSServerTypeUDP      DNSServerType = "udp"
-	DNSServerTypeDoH      DNSServerType = "doh"
-	DNSServerTypeDoT      DNSServerType = "dot"
-	DNSServerTypeDoQ      DNSServerType = "doq"
-	DNSServerTypeDNSCrypt DNSServerType = "dnscrypt"
+	DNSTypeDefault  DNSType = "default"
+	DNSTypeUDP      DNSType = "udp"
+	DNSTypeDoH      DNSType = "doh"
+	DNSTypeDoT      DNSType = "dot"
+	DNSTypeDoQ      DNSType = "doq"
+	DNSTypeDNSCrypt DNSType = "dnscrypt"
 )

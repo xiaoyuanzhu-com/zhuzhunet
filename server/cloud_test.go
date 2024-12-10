@@ -19,3 +19,16 @@ func TestGetManifest(t *testing.T) {
 	}
 	utils.PrintJSON(manifest)
 }
+
+func TestGetDNSList(t *testing.T) {
+	cfg, err := configs.Load()
+	if err != nil {
+		t.Fatal(err)
+	}
+	cloud := NewCloud(cfg.CloudURL)
+	dnsList, err := cloud.GetDNSList()
+	if err != nil {
+		t.Fatal(err)
+	}
+	utils.PrintJSON(dnsList)
+}

@@ -1,6 +1,10 @@
 import React from 'react'
 import { Nav, Typography } from '@douyinfe/semi-ui'
 import TestDNS from './test-dns'
+import TestLatency from './test-latency'
+import TestSpeed from './test-speed'
+import TestIP from './test-ip'
+import TestAccess from './test-access'
 import { useState, useEffect } from 'react'
 import api from '../../lib/api'
 const { Text } = Typography
@@ -22,6 +26,10 @@ export default function Test() {
   }, [])
   return (
     <div>
+      <TestLatency manifest={manifest} brands={brands} />
+      <TestSpeed manifest={manifest} brands={brands} />
+      <TestAccess manifest={manifest} brands={brands} />
+      <TestIP manifest={manifest} brands={brands} />
       <TestDNS manifest={manifest} brands={brands} />
     </div>
   )

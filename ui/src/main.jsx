@@ -8,6 +8,7 @@ import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US'
 import Test from './pages/test/test.jsx'
 import Monitoring from './pages/monitoring/monitoring.jsx'
 import Settings from './pages/settings/settings.jsx'
+import DiagnoseDNS from './pages/diagnose/diagnose-dns.jsx'
 
 function setDarkMode(dark) {
   const body = document.body
@@ -38,6 +39,7 @@ createRoot(root).render(
           <Route element={<AppLayout />} >
             <Route index element={<Test />} />
             <Route path="/monitoring" element={<Monitoring />} />
+            <Route path="/diagnose/dns" element={<DiagnoseDNS />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>

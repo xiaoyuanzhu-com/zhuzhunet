@@ -1,6 +1,16 @@
 {
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "go.testFlags": ["-v"],
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[go]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  },
+  "go.testFlags": ["-v", "-count=1"],
   "go.testTimeout": "600s"
 }
