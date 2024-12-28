@@ -1,14 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router'
-import './index.css'
-import AppLayout from './components/app-layout.jsx'
 import { LocaleProvider } from '@douyinfe/semi-ui'
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US'
-import Test from './pages/test/test.jsx'
-import Monitoring from './pages/monitoring/monitoring.jsx'
-import Settings from './pages/settings/settings.jsx'
-import DiagnoseDNS from './pages/diagnose/diagnose-dns.jsx'
+import AppRoutes from './components/app-routes.jsx'
+import { initVChartSemiTheme } from '@visactor/vchart-semi-theme'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+initVChartSemiTheme()
 
 function setDarkMode(dark) {
   const body = document.body
@@ -34,16 +32,7 @@ const root = document.getElementById("root")
 createRoot(root).render(
   <StrictMode>
     <LocaleProvider locale={en_US}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />} >
-            <Route index element={<Test />} />
-            <Route path="/monitoring" element={<Monitoring />} />
-            <Route path="/diagnose/dns" element={<DiagnoseDNS />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppRoutes />
     </LocaleProvider>
   </StrictMode>,
 )

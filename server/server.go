@@ -3,21 +3,34 @@ package server
 import (
 	"context"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/static"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"github.com/xiaoyuanzhu-com/zhuzhunet/cloud"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/configs"
+	"github.com/xiaoyuanzhu-com/zhuzhunet/diagnose"
 	"github.com/xiaoyuanzhu-com/zhuzhunet/logs"
+	"github.com/xiaoyuanzhu-com/zhuzhunet/models"
 	"go.uber.org/zap"
 )
+
+type AsyncAPIRecord struct {
+	Input  *models.APIInput
+	Output *models.APIOutput
+}
 
 type Server struct {
 	configs    *configs.Configs
 	httpServer *http.Server
-	cloud      *Cloud
+	cloud      *cloud.Cloud
+	diagnose   *diagnose.Diagnose
+
+	asyncMap     map[string]*AsyncAPIRecord
+	asyncMapLock sync.RWMutex
 }
 
 func NewServer(configs *configs.Configs) *Server {
@@ -28,7 +41,9 @@ func NewServer(configs *configs.Configs) *Server {
 
 func (s *Server) Start() error {
 	logs.Info("start server", zap.Any("configs", s.configs))
-	s.cloud = NewCloud(s.configs.CloudURL)
+	s.cloud = cloud.NewCloud(s.configs.CloudURL)
+	s.diagnose = diagnose.NewDiagnose(s.cloud)
+	s.asyncMap = make(map[string]*AsyncAPIRecord)
 	if err := s.startAPI(); err != nil {
 		return err
 	}

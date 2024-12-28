@@ -1,9 +1,11 @@
-package server
+package cloud
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 
 	"github.com/xiaoyuanzhu-com/zhuzhunet/models"
 )
@@ -53,4 +55,20 @@ func (c *Cloud) GetDNSList() (*models.DNSList, error) {
 		return nil, err
 	}
 	return &dnsList, nil
+}
+
+func (c *Cloud) GetWebsiteList() (*models.WebsiteList, error) {
+	var websiteList models.WebsiteList
+	if err := c.getJSON("/api/websites", &websiteList); err != nil {
+		return nil, err
+	}
+	return &websiteList, nil
+}
+
+func (c *Cloud) GetIPInfo(ips []string) ([]*models.IPInfo, error) {
+	var ipInfo []*models.IPInfo
+	if err := c.getJSON(fmt.Sprintf("/api/ip/%s", strings.Join(ips, ",")), &ipInfo); err != nil {
+		return nil, err
+	}
+	return ipInfo, nil
 }

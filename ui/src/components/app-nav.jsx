@@ -1,6 +1,6 @@
 import React from 'react'
 import { Nav } from '@douyinfe/semi-ui'
-import { IconCheckbox, IconRating, IconToast, IconConfig, IconHeart, IconGettingStarted } from '@douyinfe/semi-icons-lab'
+import { IconCheckbox, IconRating, IconToast, IconConfig, IconHeart, IconGettingStarted, IconNavigation, IconScrollList, IconTimePicker, IconSpin } from '@douyinfe/semi-icons-lab'
 import { Link } from 'react-router'
 
 export default function AppFooter() {
@@ -28,6 +28,24 @@ export default function AppFooter() {
           text: 'DNS',
           to: '/diagnose/dns',
           icon: <IconRating />,
+        },
+        {
+          itemKey: 'http',
+          text: 'HTTP',
+          to: '/diagnose/http',
+          icon: <IconTimePicker />,
+        },
+        {
+          itemKey: 'ping',
+          text: 'Ping',
+          to: '/diagnose/ping',
+          icon: <IconSpin />,
+        },
+        {
+          itemKey: 'traceroute',
+          text: 'Traceroute',
+          to: '/diagnose/traceroute',
+          icon: <IconNavigation />,
         },
       ],
     },
