@@ -11,4 +11,5 @@ export default {
   getDNSList: () => getJSON('/api/dns'),
   getWebsiteList: () => getJSON('/api/websites'),
   ping: (address, count) => getJSON(`/api/ping?address=${address}&count=${count}&async=true`),
+  getIPInfo: (ip) => getJSON(`/api/ip/${ip}`),
 }

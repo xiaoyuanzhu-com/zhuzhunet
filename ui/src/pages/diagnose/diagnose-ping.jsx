@@ -6,7 +6,6 @@ import api from '../../lib/api'
 import { useState, useEffect } from 'react'
 import Brand from './components/brand'
 import { VChart } from "@visactor/react-vchart"
-
 const { Column } = Table
 
 function sleep(ms) {
@@ -91,13 +90,11 @@ export default function DiagnosePing() {
         }
       ],
       tooltip: {
-        visible: true,
         mark: {
           title: {
             visible: false
           },
           content: {
-            visible: true,
             key: (datum) => `${new Date(datum.x).toString()}`,
             value: (datum) => `${(datum.y / 1000000).toFixed(2)}ms`,
           }

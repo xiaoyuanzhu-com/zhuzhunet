@@ -1,6 +1,6 @@
 import React from 'react'
 import { Nav } from '@douyinfe/semi-ui'
-import { IconCheckbox, IconRating, IconToast, IconConfig, IconHeart, IconGettingStarted, IconNavigation, IconScrollList, IconTimePicker, IconSpin } from '@douyinfe/semi-icons-lab'
+import { IconCheckbox, IconRating, IconMarkdown, IconToast, IconConfig, IconNotification, IconHeart, IconGettingStarted, IconNavigation, IconScrollList, IconTimePicker, IconSpin } from '@douyinfe/semi-icons-lab'
 import { Link } from 'react-router'
 
 export default function AppFooter() {
@@ -15,14 +15,20 @@ export default function AppFooter() {
       itemKey: 'monitoring',
       text: 'Monitoring',
       to: '/monitoring',
-      icon: <IconHeart />,
+      icon: <IconNotification />,
     },
     {
       itemKey: 'diagnose',
       text: 'Diagnose',
       to: '/diagnose',
-      icon: <IconToast />,
+      icon: <IconCheckbox />,
       items: [
+        {
+          itemKey: 'ip',
+          text: 'IP',
+          to: '/diagnose/ip',
+          icon: <IconMarkdown />,
+        },
         {
           itemKey: 'dns',
           text: 'DNS',
@@ -54,6 +60,12 @@ export default function AppFooter() {
       text: 'Settings',
       to: '/settings',
       icon: <IconConfig />,
+    },
+    {
+      itemKey: 'credits',
+      text: 'Credits',
+      to: '/credits',
+      icon: <IconHeart />,
     },
   ]
   const renderWrapper = ({ itemElement, isSubNav, isInSubNav, props }) => {
